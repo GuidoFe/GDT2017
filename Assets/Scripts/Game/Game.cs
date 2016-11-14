@@ -4,7 +4,7 @@ using System.Collections;
 public class Game:MonoBehaviour {
     public GameObject terrain;
     void Start() { 
-        generateLevel(50, 50, "tile");
+        generateLevel(50, 50, "grass");
         terrain.name = "Terrain";
     }
 	// Update is called once per frame

@@ -19,13 +19,27 @@ public class MouseManager : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hitInfo)) {
                 drawPoint = hitInfo.point;
-                drawPoint.z = -1;
+                drawPoint.z = -2;
                 drawPoint.x = Mathf.Floor(drawPoint.x) + 0.5f;
                 drawPoint.y = Mathf.Floor(drawPoint.y) + 0.5f;
                 mouseGrid.transform.position = drawPoint;
             }
             else mouseGrid.SetActive(false);
         }
-        
+        if (Input.GetMouseButtonDown(0)) {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hitInfo)) {
+                //Debug.Log("Hit");
+                drawPoint = hitInfo.point;
+                drawPoint.z = -1;
+                drawPoint.x = Mathf.Floor(drawPoint.x) + 0.5f;
+                drawPoint.y = Mathf.Floor(drawPoint.y) + 0.5f;
+                Vector2 matrixPos = new Vector2(drawPoint.x + Mathf.Floor(this.transform.position.x), drawPoint.y + Mathf.Floor(this.transform.position.y));
+                GameObject Tile = Instantiate(Resources.Load("Prefabs/Tile", typeof(GameObject)) as GameObject);
+                Tile.transform.position = drawPoint;
+                Tile.name = "Tile " + matrixPos.x + "," + matrixPos.y;
+                Tile.GetComponent<SpriteRenderer>().sprite = Resources.Load("Sprites/road_v_v_b", typeof(Sprite)) as Sprite;
+            }
+        }
 	}
 }
